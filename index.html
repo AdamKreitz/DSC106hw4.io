@@ -1,0 +1,149 @@
+
+
+<html>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+  <script src="https://code.highcharts.com/highcharts-more.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/histogram-bellcurve.js"></script>
+<div id="container1"></div>
+  <body>
+		<div id="word-cloud"></div>
+      	<br/>
+      	<div id="radar"></div>
+    </body>
+  <script>
+	data = [
+  		{name: "Titanic", weight: 2129},
+  		{name: "Inception", weight: 826},
+  		{name: "The Revenant", weight: 519},
+      {name: "Django Unchained", weight: 425},
+      {name: "Wolf of Wall Street", weight: 392},
+      {name: "Catch Me If You Can", weight: 352},
+      {name: "The Great Gatsby", weight: 351},
+      {name: "Once Upon a Time ... In Hollywood", weight: 345},
+      {name: "Shutter Island", weight: 295},
+      {name: "The Departed", weight: 290},
+      {name: "The Aviator", weight: 214},
+      {name: "Gangs of New York", weight: 194},
+      {name: "The Man in the Iron Mask", weight: 183},
+      {name: "Blood Diamond", weight: 171},
+      {name: "Romeo + Juliet", weight: 148},
+      {name: "The Beach", weight: 144},
+      {name: "Body of Lies", weight: 115},
+      {name: "J. Edgar", weight: 85},
+      {name: "Revolutionary Road", weight: 75},
+      {name: "The Quick and the Dead", weight: 19},
+      {name: "Marvin's Room", weight: 13},
+      {name: "What's Eating Gilbert Grape", weight: 10},
+      {name: "Celebrity", weight: 5},
+      {name: "This Boy's Life", weight: 4},
+      {name: "The Basketball Diaries", weight: 2}
+     ];
+
+     Highcharts.chart('word-cloud', {
+       series: [{
+           type: 'wordcloud',
+           data: data,
+           name: 'Box office sales (in millions)'
+       }],
+       title: {
+           text: "Wordcloud of Leonardo DiCaprio's Movies"
+       }
+     });
+
+
+    var categories = ["Drama", "Comedy", "Horror", "Sci-fi", "Romance", "Thriller", "Action", "Mystery"];
+    Highcharts.chart('radar', {
+
+    chart: {
+        polar: true
+    },
+
+    title: {
+        text: 'Average DiCaprio Movie MetaScore by Genre'
+    },
+
+    pane: {
+        startAngle: 0,
+        endAngle: 360
+    },
+
+    xAxis: {
+        tickInterval: 45,
+        min: 0,
+        max: 360,
+        labels: {
+            formatter: function () {
+                return categories[this.value/45];
+            },
+            step: 1
+        }
+    },
+
+    yAxis: {
+        min: 0
+    },
+
+    plotOptions: {
+        series: {
+            pointStart: 0,
+            pointInterval: 45
+        },
+        column: {
+            pointPadding: 0,
+            groupPadding: 0
+        }
+    },
+
+    series: [ {
+        type: 'area',
+        name: 'Score (out of 100)',
+        data: [64.3, 62, 44, 74, 58.5, 63.6, 63.75, 63] //Scores
+    }]
+});
+var data = [75, 81, 74, 75, 76, 63, 72, 73, 69, 64, 55, 85, 75, 77, 43, 57, 59, 49, 46, 60, 60, 68, 48, 41, 42
+];
+
+var data = [75, 81, 74, 75, 76, 63, 72, 73, 69, 64, 55, 85, 75, 77, 43, 57, 59, 49, 46, 60, 60, 68, 48, 41, 42];
+
+Highcharts.chart('container1', {
+    title: {
+        text: 'Average Dicaprio Movie Ratings'
+    },
+    xAxis: [{
+        title: { text: 'Data' },
+        alignTicks: false
+    }, {
+        title: { text: 'Histogram MetaRating' },
+        alignTicks: false,
+        opposite: true
+    }],
+
+    yAxis: [{
+        title: { text: 'MetaRating' }
+    }, {
+        title: null,
+        opposite: true
+    }],
+
+    series: [{
+        name: 'Histogram',
+        type: 'histogram',
+        xAxis: 1,
+        yAxis: 1,
+        baseSeries: 's1',
+        zIndex: -1
+    }, {
+        name: 'Data',
+        type: 'scatter',
+        data: data,
+        id: 's1',
+        marker: {
+            radius: 1.5
+        }
+    }]
+});
+	</script>
+</html>
